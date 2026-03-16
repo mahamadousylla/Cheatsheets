@@ -39,6 +39,8 @@
 | `git branch <name>` | Create a new branch |
 | `git checkout <branch>` | Switch to branch |
 | `git checkout -b <branch>` | Create + switch in one step |
+| `git checkout -b <branch> <file>` | Restores a file from the remote
+  branch |
 | `git merge <branch>` | Merge branch into current |
 | `git branch -d <branch>` | Delete a branch |
 
