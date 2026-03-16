@@ -69,7 +69,7 @@
 | `git diff <option1> <option2>` | Compares two things and shows the line-by-line differences between them. Can be two branches (git diff main origin/main), two commits, a branch and a commit |
 | `git show <commit>` | Show details of a commit. Defaults to last commit if none is specified. Shows just the line changes. Include metadata (author, date, message) |
 | `git show --name-only` | Same as above but shows only the filename |
-| `git status` | Show changed/staged/untracked files (filenames only, no line changes) |
+| `git status` | Show changed/staged/untracked files. Only the filenames and their state are shown |
 | `git blame <file>` | Show who changed each line |
 
 ---
