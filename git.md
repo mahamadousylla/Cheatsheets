@@ -6,7 +6,7 @@
 | `git init` | Initialize a new local repo |
 | `git clone <url>` | Clone a remote repo locally |
 | `git remote add origin <url>` | Link local repo to a remote |
-| `git remote -v` | Show remote URLs |
+| `git remote -v` | Show remote URLs. Shows you the URLs your local repo is connected to — useful to verify you're pushing/pulling from the right place |
 
 ---
 
@@ -26,6 +26,7 @@
 |---------|--------|
 | `git push` | Push to remote |
 | `git push -u origin <branch>` | Push + set upstream (first push) |
+| `git push --set-upstream origin <branch>` | Same as as shorthand version git push -u etc |
 | `git pull` | Fetch + merge remote changes |
 | `git fetch` | Download remote changes without merging |
 
@@ -62,7 +63,8 @@
 | `git diff HEAD` | Shows all, both staged and unstaged changes compared to the last commit |
 | `git diff` | Show unstaged changes. Includes only the lines changed. |
 | `git diff --staged` | Show staged changes |
-| `git show <commit>` | Show details of a commit. Shows just the line changes. Include metadata (author, date, message) |
+| `git show <commit>` | Show details of a commit. Defaults to last commit if none is specified. Shows just the line changes. Include metadata (author, date, message) |
+| `git show --name-only` | Same as above but shows only the filename |
 | `git blame <file>` | Show who changed each line |
 
 ---
