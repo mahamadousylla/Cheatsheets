@@ -80,8 +80,9 @@
 | `git stash` | Temporarily save uncommitted changes |
 | `git stash pop` | Restore stashed changes |
 | `git stash apply` | Restore stashed changes. Use apply if you want to apply the same stash to multiple branches. |
+| `git stash drop` | Removes the most recent stash |
 | `git stash list` | List all stashes |
-
+| `git stash show -p <stash>` | Shows the full line-by-line diff of a stash. Without -p you only get the filenames. i.e stash@{0} |
 ---
 
 ## Rebase (use with care)
