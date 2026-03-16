@@ -26,7 +26,7 @@
 |---------|--------|
 | `git push` | Push to remote |
 | `git push -u origin <branch>` | Push + set upstream (first push) |
-| `git push --set-upstream origin <branch>` | Same as as shorthand version git push -u etc |
+| `git push --set-upstream origin <branch>` | Same as as shorthand version git push -u origin |
 | `git pull` | Fetch + merge remote changes |
 | `git fetch` | Download remote changes without merging |
 
@@ -49,6 +49,7 @@
 |---------|--------|
 | `git restore <file>` | Discard unstaged changes in a file |
 | `git restore --staged <file>` | Unstage a file |
+| `git reset --mixed HEAD~1` | Undo last commit, move all changes to unstaged |
 | `git reset --soft HEAD~1` | Undo last commit, keep changes staged |
 | `git reset --hard HEAD~1` | Undo last commit, discard changes |
 | `git revert <commit>` | Create a new commit that undoes a commit (safe for shared branches) |
@@ -63,6 +64,7 @@
 | `git diff HEAD` | Shows all, both staged and unstaged changes compared to the last commit |
 | `git diff` | Show unstaged changes. Includes only the lines changed. |
 | `git diff --staged` | Show staged changes |
+| `git diff <option1> <option2>` | Compares two things and shows the line-by-line differences between them. Can be two branches (git diff main origin/main), two commits, a branch and a commit |
 | `git show <commit>` | Show details of a commit. Defaults to last commit if none is specified. Shows just the line changes. Include metadata (author, date, message) |
 | `git show --name-only` | Same as above but shows only the filename |
 | `git blame <file>` | Show who changed each line |
