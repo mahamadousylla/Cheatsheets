@@ -86,7 +86,49 @@
 ---
 
 ## Rebase (use with care)
+It moves your branch's commits on top of another branch, as if you had branched off later.
+
+main:    A - B - C
+feature:     D - E
+
+after git rebase main:
+main:    A - B - C
+feature:         D - E
+
+Instead of a merge commit, your commits get reapplied on top of the latest code. Keeps history cleaner but rewrites commits, so avoid it on shared branches.
+
+You branched off B, made commits D and E, but meanwhile C was added to main. Rebase brings in C, re-applies your commits on top of it, resolves any conflicts, then you merge back into main and push.
+
 | Command | Action |
 |---------|--------|
 | `git rebase <branch>` | Reapply commits on top of another branch |
-| `git rebase -i HEAD~n` | Interactive rebase — squash/edit last n commits |
+| `git rebase -i HEAD~n` | Interactive rebase — squash/edit last n commits. Common use case — squash several small commits into one clean commit before merging |
+| `git rebasev--continue` | Tells git to move on and re-apply the next commit. You run it after each conflict until all commits are replayed. |
+
+
+Example:
+
+# you're on feature branch, which has commits D and E
+# main has new commit C
+
+  git checkout feature
+  git rebase main
+
+# git now re-applies D and E on top of C
+# fix conflicts if any, then
+
+  git rebase --continue
+---
+
+## Config
+It's for setting your git preferences — things like your identity, default editor, default branch name, and behavior settings. Changes apply either globally (all repos) with --global or just for the current repo without it.
+
+| Command | Action |
+|---------|--------|
+| `git config --global user.name "Name"` | Set your name (attached to every commit) |
+| `git config --global user.email "email"` | Set your email (attached to every commit) |
+| `git config --list` | Show all current config settings |
+| `git config --global core.editor "code --wait"` | Set VS Code as default editor |
+| `git config --global init.defaultBranch main` | Set default branch name to main |
+
+---
