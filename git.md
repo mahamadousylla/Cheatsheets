@@ -16,6 +16,7 @@
 | `git add <file>` | Stage a file |
 | `git add .` | Stage all changes |
 | `git commit -m "message"` | Commit staged changes |
+| `git commit -am "message"` | Stages all modified tracked files and commits in one step — combines git add and git commit -m. Does not include new/untracked files. |
 | `git commit --amend` | Edit the last commit message (before pushing) |
 
 ---
@@ -26,8 +27,8 @@
 | `git push` | Push to remote |
 | `git push -u origin <branch>` | Push + set upstream (first push) |
 | `git push --set-upstream origin <branch>` | Same as as shorthand version git push -u origin |
+| `git fetch` | Download remote changes without merging. Good if you want to see what's changed before deciding to merge. Can be paired with git diff |
 | `git pull` | Fetch + merge remote changes |
-| `git fetch` | Download remote changes without merging |
 
 ---
 
@@ -38,8 +39,9 @@
 | `git branch <name>` | Create a new branch |
 | `git checkout <branch>` | Switch to branch |
 | `git checkout -b <branch>` | Create + switch in one step |
-| `git checkout -b <branch> <file>` | Restores a file from the remote
-  branch |
+| `git checkout -b <branch> <file>` | Restores a file from the remote branch |
+| `git switch <branch>` | Switch to a branch (newer alternative to git checkout <branch>) |
+| `git switch -` | Switch back to the previous branch you were on |
 | `git merge <branch>` | Merge branch into current |
 | `git branch -d <branch>` | Delete a branch |
 | `git push origin --delete <branch>` | Delete a branch |
@@ -49,11 +51,20 @@
 ## Undoing Things
 | Command | Action |
 |---------|--------|
-| `git restore <file>` | Discard unstaged changes in a file |
+| `git restore <file>` | Discard unstaged changes in a file, restores file to last commit |
 | `git restore --staged <file>` | Unstage a file |
 | `git reset --mixed HEAD~1` | Undo last commit, move all changes to unstaged |
 | `git reset --soft HEAD~1` | Undo last commit, keep changes staged |
 | `git reset --hard HEAD~1` | Undo last commit, discard changes |
+| `git reset --mode <commit_hash>` | Moves the branch back to that commit_hash.
+
+The mixed mode will unstage any changes made after that commit_hash. 
+
+The soft mode will keep any changes in staged made after that commit_hash.
+
+The hard mode will delete any changes after that commit_hash.
+
+commit_hash can come from git log. |
 | `git revert <commit>` | Create a new commit that undoes a commit (safe for shared branches) |
 
 ---
@@ -61,11 +72,11 @@
 ## Inspecting
 | Command | Action |
 |---------|--------|
-| `git log` | Show commit history |
+| `git log` | Show commit history of your current branch - commit hash, author, date, and message for each commit. Each commit is associated with a unique hash |
 | `git log --oneline` | Compact commit history |
-| `git diff HEAD` | Shows all, both staged and unstaged changes compared to the last commit |
-| `git diff` | Show unstaged changes. Includes only the lines changed. |
-| `git diff --staged` | Show staged changes |
+| `git diff` | Show unstaged changes. Includes only the lines changed. File(s) under VSCode>Changes vs File(s) from the last commit. If you have staged changes for that file, they will not show in the diff. |
+| `git diff --staged` | Show staged changes compared to the last commit. File(s) under VSCode>Staged Changes vs File(s) from the last commit. |
+| `git diff HEAD` | Shows all, both staged and unstaged changes compared to the file(s) in the last commit |
 | `git diff <option1> <option2>` | Compares two things and shows the line-by-line differences between them. Can be two branches (git diff main origin/main), two commits, a branch and a commit |
 | `git show <commit>` | Show details of a commit. Defaults to last commit if none is specified. Shows just the line changes. Include metadata (author, date, message) |
 | `git show --name-only` | Same as above but shows only the filename |
@@ -78,7 +89,7 @@
 | Command | Action |
 |---------|--------|
 | `git stash` | Temporarily save uncommitted changes |
-| `git stash pop` | Restore stashed changes |
+| `git stash pop` | Restore stashed changes and removes that stash |
 | `git stash apply` | Restore stashed changes. Use apply if you want to apply the same stash to multiple branches. |
 | `git stash drop` | Removes the most recent stash |
 | `git stash list` | List all stashes |
@@ -103,22 +114,23 @@ You branched off B, made commits D and E, but meanwhile C was added to main. Reb
 |---------|--------|
 | `git rebase <branch>` | Reapply commits on top of another branch |
 | `git rebase -i HEAD~n` | Interactive rebase — squash/edit last n commits. Common use case — squash several small commits into one clean commit before merging |
-| `git rebasev--continue` | Tells git to move on and re-apply the next commit. You run it after each conflict until all commits are replayed. |
+| `git rebase --continue` | Tells git to move on and re-apply the next commit. You run it after each conflict until all commits are replayed. |
 
 
-Example:
+### Example:
 
-# you're on feature branch, which has commits D and E
-# main has new commit C
+- you're on feature branch, which has commits D and E
+- main has new commit C
 
   git checkout feature
   git rebase main
 
-# git now re-applies D and E on top of C
-# fix conflicts if any, then
+- git now re-applies D and E on top of C
+- fix conflicts if any, then
 
   git rebase --continue
 ---
+
 
 ## Config
 It's for setting your git preferences — things like your identity, default editor, default branch name, and behavior settings. Changes apply either globally (all repos) with --global or just for the current repo without it.
