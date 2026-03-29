@@ -35,11 +35,12 @@ macOS terminal apps (Terminal, iTerm2) open non-login shells for Zsh by default,
 
 `.zprofile`, is used only for login shells, i.e SSH sessions, or if you explicitly start a login shell with `zsh -l` or `zsh --login`.
 
-When .zprofile Runs:
+When `.zprofile` Runs:
 
 - Login Sessions: When you first log in to your machine or a remote system via SSH.
 - Before .zshrc: It runs before .zshrc, making it suitable for defining variables that .zshrc might need.
    
+On a login shell, Zsh loads `.zprofile` first, then `.zshrc` after. So both run, in that order. 
 
 # zshrc & bash_profile
 
